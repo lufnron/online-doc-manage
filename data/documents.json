@@ -9,6 +9,11 @@
       "id": "category-2",
       "name": "技术文档",
       "sort": 2
+    },
+    {
+      "id": "category-3",
+      "name": "项目管理",
+      "sort": 3
     }
   ],
   "documents": [
@@ -24,7 +29,7 @@
       "id": "doc-2",
       "name": "通办BU-重点跟踪项目",
       "url": "https://docs.qq.com/sheet/DQ0NyeFhXeExZR1Jr?tab=BB08J2",
-      "categoryId": "category-1",
+      "categoryId": "category-3",
       "remark": "通办BU重点跟踪项目跟踪表",
       "createdAt": "2026-03-27"
     },
@@ -32,7 +37,7 @@
       "id": "doc-3",
       "name": "26年验收管控",
       "url": "https://docs.qq.com/sheet/DQ25WcEtkdWFTdU9O?tab=BB08J2",
-      "categoryId": "category-1",
+      "categoryId": "category-3",
       "remark": "2026年验收管控表",
       "createdAt": "2026-03-27"
     },
