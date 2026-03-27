@@ -1,0 +1,24 @@
+{
+  "categories": [
+    {
+      "id": "category-1",
+      "name": "项目文档",
+      "sort": 1
+    },
+    {
+      "id": "category-2",
+      "name": "技术文档",
+      "sort": 2
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-1",
+      "name": "在线文档地址管理系统设计",
+      "url": "https://github.com/lufnron/online-doc-manage",
+      "categoryId": "category-1",
+      "remark": "轻量化纯静态在线文档索引系统，支持分类筛选和关键词搜索",
+      "createdAt": "2026-03-27"
+    }
+  ]
+}

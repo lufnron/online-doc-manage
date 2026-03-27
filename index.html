@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在线文档索引</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="flex flex-col min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <h1 class="text-2xl font-bold text-gray-900">📚 在线文档索引</h1>
+          <div class="w-64">
+            <input 
+              type="search" 
+              id="searchInput" 
+              placeholder="🔍 搜索文档..." 
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+      <!-- 左侧分类侧边栏 -->
+      <aside class="w-48 bg-white shadow-sm overflow-y-auto flex-shrink-0 hidden md:block">
+        <nav class="p-4">
+          <ul id="categoryList" class="space-y-1">
+            <!-- 分类列表由JS动态渲染 -->
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- 移动端分类菜单按钮 -->
+      <div class="md:hidden fixed bottom-4 left-4 z-10">
+        <button 
+          id="toggleCategoryBtn" 
+          class="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700"
+        >
+          🏷️
+        </button>
+      </div>
+
+      <!-- 移动端分类弹窗 -->
+      <div id="mobileCategoryModal" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden">
+        <div class="absolute left-0 top-0 bottom-0 w-64 bg-white">
+          <div class="p-4">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="font-bold text-lg">分类筛选</h3>
+              <button id="closeMobileCategory" class="text-gray-500 text-xl">&times;</button>
+            </div>
+            <ul id="mobileCategoryList" class="space-y-1">
+              <!-- 分类列表由JS动态渲染 -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 主内容区 - 文档卡片网格 -->
+      <main class="flex-1 overflow-y-auto p-4 md:p-6">
+        <div id="documentGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+          <!-- 文档卡片由JS动态渲染 -->
+          <div id="loadingPlaceholder" class="col-span-full text-center py-12 text-gray-500">
+            加载中...
+          </div>
+        </div>
+        <div id="emptyState" class="hidden col-span-full text-center py-12 text-gray-500">
+          <p class="text-lg">没有找到匹配的文档</p>
+          <p class="text-sm mt-2">试试更换关键词或分类</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
