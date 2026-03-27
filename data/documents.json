@@ -85,6 +85,22 @@
       "categoryId": "category-4",
       "remark": "政务BG AI提效与推广基于场景细化文档",
       "createdAt": "2026-03-27"
+    },
+    {
+      "id": "doc-9",
+      "name": "政务BG-AI提效与推广-项目实践-周进展积记录",
+      "url": "https://www.kdocs.cn/l/cjPXALGAx5Dg",
+      "categoryId": "category-4",
+      "remark": "政务BG AI提效与推广项目实践周进展记录",
+      "createdAt": "2026-03-27"
+    },
+    {
+      "id": "doc-10",
+      "name": "政务BG-AI提效与推广-基于项目场景的提效与应用推广-工作进展-0309",
+      "url": "https://www.kdocs.cn/l/ccWQrXvEBWQp",
+      "categoryId": "category-4",
+      "remark": "政务BG AI提效与推广工作进展0309",
+      "createdAt": "2026-03-27"
     }
   ]
 }
