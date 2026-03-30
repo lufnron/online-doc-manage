@@ -112,30 +112,45 @@ function renderDocuments() {
   const cardsHtml = filtered.map(doc => {
     const categoryName = getCategoryName(doc.categoryId);
     const remark = doc.remark || '';
+    const docJson = JSON.stringify({name: doc.name, url: doc.url}).replace(/"/g, '&quot;');
     
     return `
-      <a 
-        href="${doc.url}" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="block bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 hover:-translate-y-1 transition-transform duration-200 overflow-hidden"
+      <div 
+        class="block bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 overflow-hidden"
       >
-        <div class="p-5">
-          <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-            📄 ${doc.name}
-          </h3>
-          <div class="mb-3">
-            <span class="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
-              🏷️ ${categoryName}
-            </span>
+        <a 
+          href="${doc.url}" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="block"
+        >
+          <div class="p-5 pb-3">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+              📄 ${doc.name}
+            </h3>
+            <div class="mb-3">
+              <span class="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                🏷️ ${categoryName}
+              </span>
+            </div>
+            ${remark ? `<p class="text-gray-600 text-sm mb-3 line-clamp-2">💬 ${remark}</p>` : '<div class="mb-3"></div>'}
+            <div class="flex justify-between items-center text-xs text-gray-500 mb-2">
+              <span>📅 ${doc.createdAt}</span>
+              <span class="text-blue-600">🔗 点击打开</span>
+            </div>
           </div>
-          ${remark ? `<p class="text-gray-600 text-sm mb-4 line-clamp-2">💬 ${remark}</p>` : '<div class="mb-4"></div>'}
-          <div class="flex justify-between items-center text-xs text-gray-500">
-            <span>📅 ${doc.createdAt}</span>
-            <span class="text-blue-600">🔗 点击打开</span>
-          </div>
+        </a>
+        <div class="px-5 pb-4">
+          <button 
+            class="copy-btn w-full py-2 bg-green-100 text-green-800 rounded hover:bg-green-200 transition-colors text-sm font-medium"
+            data-name="${doc.name}"
+            data-url="${doc.url}"
+            onclick="event.stopPropagation(); copyDocInfo(this)"
+          >
+            📋 复制文档信息
+          </button>
         </div>
-      </a>
+      </div>
     `;
   }).join('');
   
@@ -219,3 +234,31 @@ function debounce(func, wait) {
     timeout = setTimeout(() => func.apply(this, arguments), wait);
   };
 }
+
+// 复制文档信息（名称 + URL）
+function copyDocInfo(button) {
+  const name = button.dataset.name;
+  const url = button.dataset.url;
+  const textToCopy = `${name}\n${url}`;
+  
+  navigator.clipboard.writeText(textToCopy)
+    .then(() => {
+      const originalText = button.textContent;
+      button.textContent = '✅ 复制成功';
+      button.classList.remove('bg-green-100', 'text-green-800', 'hover:bg-green-200');
+      button.classList.add('bg-green-500', 'text-white');
+      
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.classList.remove('bg-green-500', 'text-white');
+        button.classList.add('bg-green-100', 'text-green-800', 'hover:bg-green-200');
+      }, 2000);
+    })
+    .catch(err => {
+      console.error('复制失败:', err);
+      alert('复制失败，请手动复制：\n' + textToCopy);
+    });
+}
+
+// 将函数挂载到window对象，使onclick可以访问
+window.copyDocInfo = copyDocInfo;
